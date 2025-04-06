@@ -190,7 +190,7 @@ def log_add_exp(a, b):
     maximum = torch.max(a, b)
     return maximum + torch.log(torch.exp(a - maximum) + torch.exp(b - maximum))
 
-# %%%%
+
 
 
 # Time embedding
