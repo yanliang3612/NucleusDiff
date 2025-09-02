@@ -209,7 +209,7 @@ if __name__ == '__main__':
     parser.add_argument('--seed', type=int, default=2021)
     parser.add_argument('--sample_num_atoms', type=str, default="prior")
     parser.add_argument('--center_pos_mode', type=str, default="protein")
-    parser.add_argument('--pos_only', type=bool, default=False)
+    parser.add_argument('--pos_only', default=False)
     parser.add_argument('--batch_size', type=int, default=100)
     parser.add_argument('--data_id', type=int, default=0)
     parser.add_argument('--cuda_device', type=int, default=0)

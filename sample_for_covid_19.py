@@ -42,7 +42,7 @@ if __name__ == '__main__':
     parser.add_argument('--result_path', type=str, default='./read_world_cdk2_test')
     parser.add_argument('--num_samples', type=int, default=1000)
     parser.add_argument('--num_steps', type=int, default=1000)
-    parser.add_argument('--pos_only', type=bool, default=False)
+    parser.add_argument('--pos_only', default=False)
     parser.add_argument('--center_pos_mode', type=str, default="protein")
     parser.add_argument('--sample_num_atoms', type=str, default="real_world_testing")
     parser.add_argument('--inference_num_atoms', type=int, default=30)

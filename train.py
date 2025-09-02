@@ -56,7 +56,7 @@ def parser_args_sweep():
     parser.add_argument('--data_split', type=str,
                         default='./data/crossdocked_pocket10_pose_w_manifold_data_split.pt')
     parser.add_argument('--ligand_atom_mode', type=str, default='add_aromatic')
-    parser.add_argument('--random_rot', type=bool, default=False)
+    parser.add_argument('--random_rot', default=False)
 
     # loss weight
     parser.add_argument('--loss_v_weight', type=float, default=100.)
@@ -78,7 +78,7 @@ def parser_args_sweep():
     parser.add_argument('--center_pos_mode', type=str, default='protein')
 
     # model setting
-    parser.add_argument('--node_indicator', type=bool, default=True)
+    parser.add_argument('--node_indicator', default=True)
     parser.add_argument('--model_type', type=str, default='uni_o2')
     parser.add_argument('--num_blocks', type=int, default=1)
     parser.add_argument('--num_layers', type=int, default=9)
@@ -90,14 +90,14 @@ def parser_args_sweep():
     parser.add_argument('--num_node_types', type=int, default=8)
 
     parser.add_argument('--act_fn', type=str, default='relu')
-    parser.add_argument('--norm', type=bool, default=True)
+    parser.add_argument('--norm', default=True)
     parser.add_argument('--cutoff_mode', type=str, default='knn')
     parser.add_argument('--ew_net_type', type=str, default='global')
     parser.add_argument('--num_x2h', type=int, default=1)
     parser.add_argument('--num_h2x', type=int, default=1)
     parser.add_argument('--r_max', type=float, default=10.)
-    parser.add_argument('--x2h_out_fc', type=bool, default=False)
-    parser.add_argument('--sync_twoup', type=bool, default=False)
+    parser.add_argument('--x2h_out_fc', default=False)
+    parser.add_argument('--sync_twoup', default=False)
 
     # train
     parser.add_argument('--seed', type=int, default=2021)
@@ -127,11 +127,11 @@ def parser_args_sweep():
     parser.add_argument('--sample_num_diffusion_timesteps', type=int, default=1000)
     parser.add_argument('--sample_num_samples', type=int, default=100)
     parser.add_argument('--sample_num_atoms', type=str, default="prior")
-    parser.add_argument('--pos_only', type=bool, default=False)
+    parser.add_argument('--pos_only', default=False)
     parser.add_argument('--sample_batch_size', type=int, default=100)
 
     # evaluate
-    parser.add_argument('--evaluate_verbose', type=bool, default=False)
+    parser.add_argument('--evaluate_verbose', default=False)
     parser.add_argument('--eval_step', type=int, default=-1)
     parser.add_argument('--eval_num_examples', type=int, default=None)
 
@@ -141,7 +141,7 @@ def parser_args_sweep():
     parser.add_argument('--tag', type=str, default='')
     parser.add_argument('--train_report_iter', type=int, default=200)
     parser.add_argument('--exp_name', type=str, default="test")
-    parser.add_argument('--use_wandb', type=bool, default=False)
+    parser.add_argument('--use_wandb', default=False)
     parser.add_argument("--sweep_id", type=str, default='yanliangfdu/targetdiff_mesh_2/d72sxrin')
     parser.add_argument('--wandb_project_name', type=str, default="sbdd_test_1")
     return parser.parse_args()
@@ -237,7 +237,7 @@ def evaluate(results_fn_list, args, logger):
 
 def main():
     args = parser_args_sweep()
-
+    # import pdb; pdb.set_trace()
     if args.use_wandb:
         wandb.init(project=args.wandb_project_name)
         wandb.config.update(args)
