@@ -5,7 +5,9 @@ This repository is the official implementation of the paper "Manifold-Constraine
 
 [[Paper]](https://arxiv.org/abs/2409.10584) [[Project Page]](https://yanliang3612.github.io/NucleusDiff/)
 
-Authors: Shengchao Liu*, Liang Yan*, Weitao Du, Weiyang Liu, Zhuoxinran Li, Hongyu Guo, Christian Borgs*, Jennifer Chayes*, Anima Anandkumar*
+Authors: Shengchao Liu*, Liang Yan*, Weitao Du, Weiyang Liu, Zhuoxinran Li, Hongyu Guo, Christian Borgs, Jennifer Chayes, Anima Anandkumar
+
+**(*: Equal Contribution)**
 
 **Proceedings of the National Academy of Sciences 2025 (PNAS 2025)**
 
