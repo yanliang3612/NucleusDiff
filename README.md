@@ -1,5 +1,7 @@
 # NucleusDiff: Manifold-Constrained Nucleus-Level Denoising Diffusion Model for Structure-Based Drug Design
 
+[![DOI](https://zenodo.org/badge/776427200.svg)](https://doi.org/10.5281/zenodo.17093932)
+
 This repository is the official implementation of the paper "Manifold-Constrained Nucleus-Level Denoising Diffusion Model for Structure-Based Drug Design".
 
 
