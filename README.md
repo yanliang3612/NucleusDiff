@@ -122,16 +122,20 @@ pip install -e .
 * 1. [clean_crossdocked.py](./crossdock_data_preparation/step1_clean_crossdocked.py) will filter the original dataset and keep the ones with RMSD < 1A.
 It will generate a `index.pkl` file and create a new directory containing the original filtered data (corresponds to `crossdocked_v1.1_rmsd1.0.tar.gz` in the drive). *You don't need these files if you have downloaded .lmdb file.*
 ```bash
-    python ./crossdock_data_preparation/step1_clean_crossdocked.py --source "./data/CrossDocked2020" --dest "./data/crossdocked_v1.1_rmsd1.0" --rmsd_thr 1.0
+    python ./crossdock_data_preparation/step1_clean_crossdocked.py \\
+           --source "./data/CrossDocked2020" --dest "./data/crossdocked_v1.1_rmsd1.0" --rmsd_thr 1.0
 ```
 * 2. [extract_pockets.py](./crossdock_data_preparation/step2_extract_pockets.py) will clip the original protein file to a 10A region around the binding molecule. E.g.
 ```bash
-    python ./crossdock_data_preparation/step2_extract_pockets.py --source "./data/crossdocked_v1.1_rmsd1.0" --dest "./data/crossdocked_v1.1_rmsd1.0_pocket10"
+    python ./crossdock_data_preparation/step2_extract_pockets.py \\
+           --source "./data/crossdocked_v1.1_rmsd1.0" --dest "./data/crossdocked_v1.1_rmsd1.0_pocket10"
 ```
 * 3. [split_pl_dataset.py](./crossdock_data_preparation/step3_split_pl_dataset.py) will split the training and test set. We use the same split `split_by_name.pt` as 
 [AR](https://arxiv.org/abs/2203.10446) and [Pocket2Mol](https://arxiv.org/abs/2205.07249), which can also be downloaded in the Google Drive - data folder.
 ```bash
-    python ./crossdock_data_preparation/step3_split_pl_dataset.py --path "./data/crossdocked_v1.1_rmsd1.0_pocket10" --dest "./data/crossdocked_pocket10_pose_split.pt" --fixed_split "./data/split_by_name.pt"
+    python ./crossdock_data_preparation/step3_split_pl_dataset.py \\
+           --path "./data/crossdocked_v1.1_rmsd1.0_pocket10" \\
+           --dest "./data/crossdocked_pocket10_pose_split.pt" --fixed_split "./data/split_by_name.pt"
 ```
 
 ### 2.2 For Crossdock manifold data
@@ -142,22 +146,28 @@ source activate Manifold
 
 2. prepare input for MSMS
 ```bash
-python step1_convert_npz_to_xyzrn.py --crossdock_source [path/to/crossdock_pocket10_auxdata/] --out_root "./data/crossdocked_pocket10_mesh"
+python step1_convert_npz_to_xyzrn.py \\
+       --crossdock_source [path/to/crossdock_pocket10_auxdata/] \\
+       --out_root "./data/crossdocked_pocket10_mesh"
 ```
 
 3. execute MSMS to generate molecular surface
 ```bash
-python step2_compute_msms.py --data_root "./data/crossdocked_pocket10_mesh" --msms-bin [path/to/MSMS/dir]/msms.x86_64Linux2.2.6.1 
+python step2_compute_msms.py \\
+       --data_root "./data/crossdocked_pocket10_mesh" \\
+       --msms-bin [path/to/MSMS/dir]/msms.x86_64Linux2.2.6.1 
 ```
 
 4. refine surface mesh
 ```bash
-python step3_refine_mesh.py --data_root "./data/crossdocked_pocket10_mesh"
+python step3_refine_mesh.py \\
+       --data_root "./data/crossdocked_pocket10_mesh"
 ```
 
 ### 2.3 Get our final lmdb data and split.pt data
 ```bash
-python ./datasets/pl_pair_dataset.py --data_root "./data/crossdocked_v1.1_rmsd1.0_pocket10"
+python ./datasets/pl_pair_dataset.py \\
+       --data_root "./data/crossdocked_v1.1_rmsd1.0_pocket10"
 ```
 
 ---
