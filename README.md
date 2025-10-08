@@ -195,7 +195,7 @@ python sample_for_crossdock.py \\
        --ckpt_path "./logs_diffusion/nucleusdiff_train" \\
        --ckpt_it 100000 \\
        --cuda_device 0 \\
-       --data_id 0 \\
+       --data_id 0 
 ```
 
 You can also speed up sampling with multiple GPUs, e.g.:
@@ -208,12 +208,18 @@ python sample_for_crossdock.py --ckpt_path "./logs_diffusion/nucleusdiff_train" 
 
 ### 3.3 Evaluation on the General Metrics 
 ```bash
-python ./evaluation/evaluate_for_crossdock_on_collision_metrics.py --sample_path "./result_output"  --eval_step -1  --protein_root "./data/test_set"  --docking_mode "vina_dock"
+python ./evaluation/evaluate_for_crossdock_on_collision_metrics.py
+--sample_path "./result_output"
+--eval_step -1
+--protein_root "./data/test_set"
+--docking_mode "vina_dock"
 ```
 
 ### 3.4 Evaluation on the Collision Metrics 
 ```bash
-python ./evaluation/evaluate_for_crossdock_on_collision_metrics.py  --sample_path "./result_output"  --eval_step -1
+python ./evaluation/evaluate_for_crossdock_on_collision_metrics.py
+--sample_path "./result_output"
+--eval_step -1
 ```
 
 ---
@@ -225,23 +231,37 @@ python ./evaluation/evaluate_for_crossdock_on_collision_metrics.py  --sample_pat
 If you want to process the dataset from scratch, you need to download `real_world.zip` from [nucleusdiff_data_and_checkpoint](https://drive.google.com/drive/folders/1boX4IOC-WVJ5zWLy2ulRGvDClN7ukUOe?usp=sharing), save it into `./data`, and run the scripts in `./covid_19_data_preparation`:
 
 ```bash
-python ./covid_19_data_preparation/extract_pockets_for_real_world.py --source "./data/real_world" --dest "./real_world_test_extract_pockets"
+python ./covid_19_data_preparation/extract_pockets_for_real_world.py
+--source "./data/real_world"
+--dest "./real_world_test_extract_pockets"
 ```
 ### 4.2 Inference (sampling)
 
 ```bash
-python sample_for_covid_19.py  --checkpoint [path/to/nucleusdiff/checkpoint]  --pdb_path "./real_world_test_extract_pockets/CDK2/cdk2_ligand_pocket10.pdb"  --result_path "./read_world_cdk2_test"  --sample_num_atoms "real_world_testing" --inference_num_atoms 30
+python sample_for_covid_19.py
+--checkpoint [path/to/nucleusdiff/checkpoint]
+--pdb_path "./real_world_test_extract_pockets/CDK2/cdk2_ligand_pocket10.pdb"
+--result_path "./read_world_cdk2_test"
+--sample_num_atoms "real_world_testing"
+--inference_num_atoms 30
 ```
 
 ### 4.3 Evaluation on the General Metrics 
 ```bash
-python ./evaluation/evaluate_for_covid_19_on_general_metrics.py --sample_path "./read_world_cdk2_test" --protein_root "./real_world/cdk2_processed.pdb"  --ligand_filename "CDK2" --docking_mode "vina_dock"
+python ./evaluation/evaluate_for_covid_19_on_general_metrics.py
+--sample_path "./read_world_cdk2_test"
+--protein_root "./real_world/cdk2_processed.pdb"
+--ligand_filename "CDK2"
+--docking_mode "vina_dock"
 ```
 
 ### 4.4 Evaluation on the Collision Metrics 
 
 ```bash
-python ./evaluation/evaluate_for_covid_19_on_collision_metrics.py --sample_path "./read_world_cdk2_test" --model "nucleusdiff_train" --target "cdk2_test"
+python ./evaluation/evaluate_for_covid_19_on_collision_metrics.py
+--sample_path "./read_world_cdk2_test"
+--model "nucleusdiff_train"
+--target "cdk2_test"
 ```
 
 
