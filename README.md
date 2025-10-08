@@ -122,22 +122,22 @@ pip install -e .
 * 1. [clean_crossdocked.py](./crossdock_data_preparation/step1_clean_crossdocked.py) will filter the original dataset and keep the ones with RMSD < 1A.
 It will generate a `index.pkl` file and create a new directory containing the original filtered data (corresponds to `crossdocked_v1.1_rmsd1.0.tar.gz` in the drive). *You don't need these files if you have downloaded .lmdb file.*
 ```bash
-    python ./crossdock_data_preparation/step1_clean_crossdocked.py \\
-           --source "./data/CrossDocked2020" \\
+    python ./crossdock_data_preparation/step1_clean_crossdocked.py 
+           --source "./data/CrossDocked2020" 
            --dest "./data/crossdocked_v1.1_rmsd1.0" --rmsd_thr 1.0
 ```
 * 2. [extract_pockets.py](./crossdock_data_preparation/step2_extract_pockets.py) will clip the original protein file to a 10A region around the binding molecule. E.g.
 ```bash
-    python ./crossdock_data_preparation/step2_extract_pockets.py \\
-           --source "./data/crossdocked_v1.1_rmsd1.0" \\
+    python ./crossdock_data_preparation/step2_extract_pockets.py 
+           --source "./data/crossdocked_v1.1_rmsd1.0" 
            --dest "./data/crossdocked_v1.1_rmsd1.0_pocket10"
 ```
 * 3. [split_pl_dataset.py](./crossdock_data_preparation/step3_split_pl_dataset.py) will split the training and test set. We use the same split `split_by_name.pt` as 
 [AR](https://arxiv.org/abs/2203.10446) and [Pocket2Mol](https://arxiv.org/abs/2205.07249), which can also be downloaded in the Google Drive - data folder.
 ```bash
-    python ./crossdock_data_preparation/step3_split_pl_dataset.py \\
-           --path "./data/crossdocked_v1.1_rmsd1.0_pocket10" \\
-           --dest "./data/crossdocked_pocket10_pose_split.pt" \\
+    python ./crossdock_data_preparation/step3_split_pl_dataset.py 
+           --path "./data/crossdocked_v1.1_rmsd1.0_pocket10" 
+           --dest "./data/crossdocked_pocket10_pose_split.pt" 
            --fixed_split "./data/split_by_name.pt"
 ```
 
@@ -149,27 +149,27 @@ source activate Manifold
 
 2. prepare input for MSMS
 ```bash
-python step1_convert_npz_to_xyzrn.py \\
-       --crossdock_source [path/to/crossdock_pocket10_auxdata/] \\
+python step1_convert_npz_to_xyzrn.py 
+       --crossdock_source [path/to/crossdock_pocket10_auxdata/] 
        --out_root "./data/crossdocked_pocket10_mesh"
 ```
 
 3. execute MSMS to generate molecular surface
 ```bash
-python step2_compute_msms.py \\
-       --data_root "./data/crossdocked_pocket10_mesh" \\
+python step2_compute_msms.py 
+       --data_root "./data/crossdocked_pocket10_mesh" 
        --msms-bin [path/to/MSMS/dir]/msms.x86_64Linux2.2.6.1 
 ```
 
 4. refine surface mesh
 ```bash
-python step3_refine_mesh.py \\
+python step3_refine_mesh.py 
        --data_root "./data/crossdocked_pocket10_mesh"
 ```
 
 ### 2.3 Get our final lmdb data and split.pt data
 ```bash
-python ./datasets/pl_pair_dataset.py \\
+python ./datasets/pl_pair_dataset.py 
        --data_root "./data/crossdocked_v1.1_rmsd1.0_pocket10"
 ```
 
@@ -179,10 +179,10 @@ python ./datasets/pl_pair_dataset.py \\
 
 ### 3.1 Training
 ```bash
-python train.py \\
-       --lr 0.001 \\
-       --device "cuda:0" \\
-       --wandb_project_name "nucleusdiff_train" \\
+python train.py 
+       --lr 0.001 
+       --device "cuda:0" 
+       --wandb_project_name "nucleusdiff_train" 
        --loss_mesh_constained_weight 1
 ```
 
@@ -191,35 +191,54 @@ python train.py \\
 
 ### 3.2 Inference (sampling)
 ```bash
-python sample_for_crossdock.py \\
-       --ckpt_path "./logs_diffusion/nucleusdiff_train" \\
-       --ckpt_it 100000 \\
-       --cuda_device 0 \\
+python sample_for_crossdock.py 
+       --ckpt_path "./logs_diffusion/nucleusdiff_train" 
+       --ckpt_it 100000 
+       --cuda_device 0 
        --data_id 0 
 ```
 
 You can also speed up sampling with multiple GPUs, e.g.:
 ```bash
-python sample_for_crossdock.py --ckpt_path "./logs_diffusion/nucleusdiff_train" --ckpt_it 100000 --cuda_device 0 --data_id 0
-python sample_for_crossdock.py --ckpt_path "./logs_diffusion/nucleusdiff_train" --ckpt_it 100000 --cuda_device 1 --data_id 1
-python sample_for_crossdock.py --ckpt_path "./logs_diffusion/nucleusdiff_train" --ckpt_it 100000 --cuda_device 2 --data_id 2
-python sample_for_crossdock.py --ckpt_path "./logs_diffusion/nucleusdiff_train" --ckpt_it 100000 --cuda_device 3 --data_id 3
+python sample_for_crossdock.py
+       --ckpt_path "./logs_diffusion/nucleusdiff_train"
+       --ckpt_it 100000
+       --cuda_device 0
+       --data_id 0
+
+python sample_for_crossdock.py
+       --ckpt_path "./logs_diffusion/nucleusdiff_train"
+       --ckpt_it 100000
+       --cuda_device 1
+       --data_id 1
+
+python sample_for_crossdock.py
+       --ckpt_path "./logs_diffusion/nucleusdiff_train"
+       --ckpt_it 100000
+       --cuda_device 2
+       --data_id 2
+
+python sample_for_crossdock.py
+       --ckpt_path "./logs_diffusion/nucleusdiff_train"
+       --ckpt_it 100000
+       --cuda_device 3
+       --data_id 3
 ```
 
 ### 3.3 Evaluation on the General Metrics 
 ```bash
 python ./evaluation/evaluate_for_crossdock_on_collision_metrics.py
---sample_path "./result_output"
---eval_step -1
---protein_root "./data/test_set"
---docking_mode "vina_dock"
+        --sample_path "./result_output"
+        --eval_step -1
+        --protein_root "./data/test_set"
+        --docking_mode "vina_dock"
 ```
 
 ### 3.4 Evaluation on the Collision Metrics 
 ```bash
 python ./evaluation/evaluate_for_crossdock_on_collision_metrics.py
---sample_path "./result_output"
---eval_step -1
+        --sample_path "./result_output"
+        --eval_step -1
 ```
 
 ---
@@ -232,36 +251,36 @@ If you want to process the dataset from scratch, you need to download `real_worl
 
 ```bash
 python ./covid_19_data_preparation/extract_pockets_for_real_world.py
---source "./data/real_world"
---dest "./real_world_test_extract_pockets"
+        --source "./data/real_world"
+        --dest "./real_world_test_extract_pockets"
 ```
 ### 4.2 Inference (sampling)
 
 ```bash
 python sample_for_covid_19.py
---checkpoint [path/to/nucleusdiff/checkpoint]
---pdb_path "./real_world_test_extract_pockets/CDK2/cdk2_ligand_pocket10.pdb"
---result_path "./read_world_cdk2_test"
---sample_num_atoms "real_world_testing"
---inference_num_atoms 30
+        --checkpoint [path/to/nucleusdiff/checkpoint]
+        --pdb_path "./real_world_test_extract_pockets/CDK2/cdk2_ligand_pocket10.pdb"
+        --result_path "./read_world_cdk2_test"
+        --sample_num_atoms "real_world_testing"
+        --inference_num_atoms 30
 ```
 
 ### 4.3 Evaluation on the General Metrics 
 ```bash
 python ./evaluation/evaluate_for_covid_19_on_general_metrics.py
---sample_path "./read_world_cdk2_test"
---protein_root "./real_world/cdk2_processed.pdb"
---ligand_filename "CDK2"
---docking_mode "vina_dock"
+        --sample_path "./read_world_cdk2_test"
+        --protein_root "./real_world/cdk2_processed.pdb"
+        --ligand_filename "CDK2"
+        --docking_mode "vina_dock"
 ```
 
 ### 4.4 Evaluation on the Collision Metrics 
 
 ```bash
 python ./evaluation/evaluate_for_covid_19_on_collision_metrics.py
---sample_path "./read_world_cdk2_test"
---model "nucleusdiff_train"
---target "cdk2_test"
+        --sample_path "./read_world_cdk2_test"
+        --model "nucleusdiff_train"
+        --target "cdk2_test"
 ```
 
 
