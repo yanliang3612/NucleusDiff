@@ -296,17 +296,14 @@ python ./evaluation/evaluate_for_covid_19_on_collision_metrics.py
 Feel free to cite this work if you find it useful to you!
 
 ```bash
-@article{
-doi:10.1073/pnas.2415666122,
-author = {Shengchao Liu  and Liang Yan  and Weitao Du  and Weiyang Liu  and Zhuoxinran Li  and Hongyu Guo  and Christian Borgs  and Jennifer Chayes  and Anima Anandkumar },
-title = {Manifold-constrained nucleus-level denoising diffusion model for structure-based drug design},
-journal = {Proceedings of the National Academy of Sciences},
-volume = {122},
-number = {41},
-pages = {e2415666122},
-year = {2025},
-doi = {10.1073/pnas.2415666122},
-URL = {https://www.pnas.org/doi/abs/10.1073/pnas.2415666122},
-eprint = {https://www.pnas.org/doi/pdf/10.1073/pnas.2415666122},
+@article{liu2025manifold,
+  title={Manifold-constrained nucleus-level denoising diffusion model for structure-based drug design},
+  author={Liu, Shengchao and Yan, Liang and Du, Weitao and Liu, Weiyang and Li, Zhuoxinran and Guo, Hongyu and Borgs, Christian and Chayes, Jennifer and Anandkumar, Anima},
+  journal={Proceedings of the National Academy of Sciences},
+  volume={122},
+  number={41},
+  pages={e2415666122},
+  year={2025},
+  publisher={National Academy of Sciences}
 }
 ```
