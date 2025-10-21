@@ -124,7 +124,8 @@ It will generate a `index.pkl` file and create a new directory containing the or
 ```bash
     python ./crossdock_data_preparation/step1_clean_crossdocked.py 
            --source "./data/CrossDocked2020" 
-           --dest "./data/crossdocked_v1.1_rmsd1.0" --rmsd_thr 1.0
+           --dest "./data/crossdocked_v1.1_rmsd1.0"
+           --rmsd_thr 1.0
 ```
 * 2. [extract_pockets.py](./crossdock_data_preparation/step2_extract_pockets.py) will clip the original protein file to a 10A region around the binding molecule. E.g.
 ```bash
