@@ -224,3 +224,7 @@ hydra/
 wandb/
 .env
 
+# Checkpoints
+checkpoints/
+
+

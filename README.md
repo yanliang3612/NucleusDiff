@@ -284,11 +284,43 @@ python ./evaluation/evaluate_for_covid_19_on_collision_metrics.py \
         --target "cdk2_test"
 ```
 
+## 5. Universal Inference for a Specified Protein
 
+Use `sample_for_specific_protein.py` to generate ligands for an arbitrary single protein pocket PDB.
 
+### 5.1 Input Preparation
+1. Prepare a pocket PDB centered at the binding site (e.g., 10 Å around the ligand or binding residues).  
+   You may reuse the script in 4.1: `./covid_19_data_preparation/extract_pockets_for_real_world.py`.
+2. Example pocket file: `./specific_protein/3cl_ligand_pocket10.pdb`.
 
+### 5.2 Inference (sampling)
+```bash
+python sample_for_specific_protein.py \
+        --checkpoint ./checkpoints/nucleusdiff_pretrained_model.pt \
+        --pdb_path ./specific_protein/3cl_ligand_pocket10.pdb \
+        --result_path ./results_specific_protein \
+        --sample_num_atoms real_world_testing \
+        --inference_num_atoms 30 \
+        --num_samples 1000 \
+        --num_steps 1000 \
+        --device cuda:0
+```
 
+Key arguments:
+- `--checkpoint`: path to a NucleusDiff checkpoint (`.pt`).
+- `--pdb_path`: pocket PDB for your target protein.
+- `--result_path`: output directory.
+- `--sample_num_atoms`: set to `real_world_testing` to use a fixed atom count.
+- `--inference_num_atoms`: atoms per generated ligand when using `real_world_testing`.
+- `--num_samples`: number of ligands to generate.
+- `--num_steps`: diffusion steps (trade-off between quality and speed).
+- `--device`: GPU device, e.g., `cuda:0`.
 
+### 5.3 Outputs
+- `${result_path}/sample_{test_time}.pt`: raw tensors and sampling trajectories.
+- `${result_path}/sdf/*.sdf`: reconstructed molecules in SDF format.
+
+Run `python sample_for_specific_protein.py --help` for the complete list of options and defaults.
 
 ---
 ## Cite Us 
