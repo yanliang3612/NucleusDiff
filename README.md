@@ -13,9 +13,6 @@ Authors: Shengchao Liu*, Liang Yan*, Weitao Du, Weiyang Liu, Zhuoxinran Li, Hong
 
 **Proceedings of the National Academy of Sciences 2025 (PNAS 2025)**
 
-<p align="center">
-  <img src="assets/nucleusdiff.png" /> 
-</p>
 
 <p align="left">
   <img src="assets/inference.gif" width="100%" /> 
