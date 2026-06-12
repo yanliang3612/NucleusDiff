@@ -21,7 +21,7 @@ Authors: Shengchao Liu*, Liang Yan*, Weitao Du, Weiyang Liu, Zhuoxinran Li, Hong
 ---
 ## 1. Installation
 
-**(Please note that we recommend using our conda environment to fully reproduce our results. If you need the evaluation results or all training log files, please feel free to contact me.)**
+**(Please note that we recommend using our conda environment to fully reproduce our results. If you need the all log files for evaluation results or  training process, please feel free to contact me [yanliangfdu@gamil.com](yanliangfdu@gmail.com).)**
 
 ### 1.1 Dependency for main experiment
 
