@@ -1,8 +1,4 @@
-<h1 align="center">NucleusDiff</h1>
-
-<p align="center">
-  <strong>Manifold-Constrained Nucleus-Level Denoising Diffusion Model<br />for Structure-Based Drug Design</strong>
-</p>
+<h1 align="center">NucleusDiff: Manifold-Constrained Nucleus-Level Denoising Diffusion Model for Structure-Based Drug Design</h1>
 
 <p align="center">
   <a href="https://arxiv.org/abs/2409.10584"><img src="https://img.shields.io/badge/arXiv-2409.10584-b31b1b" alt="arXiv" /></a>
