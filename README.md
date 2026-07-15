@@ -6,6 +6,7 @@
   <a href="https://www.pnas.org/doi/10.1073/pnas.2415666122"><img src="https://img.shields.io/badge/Paper-PNAS-B31B1B" alt="PNAS Paper" /></a>
   <a href="https://www.caltech.edu/about/news/new-ai-model-for-drug-design-brings-more-physics-to-bear-in-predictions"><img src="https://img.shields.io/badge/Caltech-News-FF6C0C" alt="Caltech News" /></a>
   <a href="https://doi.org/10.5281/zenodo.17093932"><img src="https://img.shields.io/badge/DOI-Zenodo-1682D4" alt="Zenodo DOI" /></a>
+  <a href="https://join.slack.com/t/matdiscoverai/shared_invite/zt-32kktcuk0-XaaJT2P9qZTfNdaCzJUGAg"><img src="https://img.shields.io/badge/Slack-Join_SciGenAI-4A154B?logo=slack&amp;logoColor=white" alt="Join SciGenAI on Slack" /></a>
 </p>
 
 <p align="center">
@@ -23,6 +24,20 @@
 </p>
 
 <p align="center">
+  <a href="#community">
+    <img src="https://readme-typing-svg.demolab.com?font=Inter&amp;weight=700&amp;size=18&amp;pause=1200&amp;color=0A66C2&amp;center=true&amp;vCenter=true&amp;width=860&amp;lines=Join+the+SciGenAI+Community+for+NucleusDiff;Real-time+Q%26A+%E2%80%A2+code+contributions+%E2%80%A2+pull+requests;Discuss+%26+collaborate+across+generative+AI+for+science" alt="Join the SciGenAI Community for NucleusDiff" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://join.slack.com/t/matdiscoverai/shared_invite/zt-32kktcuk0-XaaJT2P9qZTfNdaCzJUGAg">
+    <img src="assets/scigenai-slack-qr.png" alt="QR code to join the SciGenAI Slack community" width="180" />
+  </a>
+  <br />
+  <a href="https://join.slack.com/t/matdiscoverai/shared_invite/zt-32kktcuk0-XaaJT2P9qZTfNdaCzJUGAg"><strong>Scan the QR code or join via the Slack invitation link</strong></a>
+</p>
+
+<p align="center">
   <img src="assets/inference.gif" width="100%" alt="NucleusDiff inference process" />
 </p>
 
@@ -37,6 +52,7 @@ NucleusDiff is a manifold-constrained denoising diffusion model for structure-ba
 - [CrossDocked2020 Experiments](#3-crossdocked2020-experiments)
 - [Therapeutic Target Experiments](#4-therapeutic-target-experiments)
 - [Universal Inference](#5-universal-inference-for-a-specified-protein)
+- [SciGenAI Community](#community)
 - [Citation](#citation)
 
 ## 1. Installation
@@ -376,6 +392,33 @@ Key arguments:
 - `${result_path}/sdf/*.sdf`: reconstructed molecules in SDF format.
 
 Run `python sample_for_specific_protein.py --help` for the complete list of options and defaults.
+
+---
+
+<a id="community"></a>
+
+## SciGenAI Community
+
+### Join the NucleusDiff Slack channel
+
+SciGenAI is a community platform for discussion and collaboration around **generative AI for science**. It connects researchers, students, engineers, and open-source contributors working across NucleusDiff and other AI4Science projects.
+
+The workspace includes a dedicated **`NucleusDiff` channel** where you can:
+
+- Ask NucleusDiff questions and get real-time community support.
+- Discuss the paper, implementation details, experiments, and reproducibility.
+- Coordinate code contributions, commits, issues, code reviews, and pull requests.
+- Connect with other generative-AI-for-science projects and find collaborators.
+
+**Option 1 — Invitation link:** [Join the SciGenAI Slack community](https://join.slack.com/t/matdiscoverai/shared_invite/zt-32kktcuk0-XaaJT2P9qZTfNdaCzJUGAg)
+
+**Option 2 — QR code:** Scan the code below with your phone. The QR image is also clickable.
+
+<p align="center">
+  <a href="https://join.slack.com/t/matdiscoverai/shared_invite/zt-32kktcuk0-XaaJT2P9qZTfNdaCzJUGAg">
+    <img src="assets/scigenai-slack-qr.png" alt="QR code to join the SciGenAI Slack community" width="220" />
+  </a>
+</p>
 
 ---
 
