@@ -1,30 +1,53 @@
-# NucleusDiff: Manifold-Constrained Nucleus-Level Denoising Diffusion Model for Structure-Based Drug Design
+<h1 align="center">NucleusDiff</h1>
 
-[![DOI](https://zenodo.org/badge/776427200.svg)](https://doi.org/10.5281/zenodo.17093932)
-
-This repository is the official implementation of the paper "Manifold-Constrained Nucleus-Level Denoising Diffusion Model for Structure-Based Drug Design".
-
-
-[[Caltech News]](https://www.caltech.edu/about/news/new-ai-model-for-drug-design-brings-more-physics-to-bear-in-predictions)[[Project Page]](https://yanliang3612.github.io/NucleusDiff/) [[Paper]](https://www.pnas.org/doi/10.1073/pnas.2415666122)  
-
-Authors: Shengchao Liu*, Liang Yan*, Weitao Du, Weiyang Liu, Zhuoxinran Li, Hongyu Guo, Christian Borgs, Jennifer Chayes, Anima Anandkumar
-
-**(*: Equal Contribution)**
-
-**Proceedings of the National Academy of Sciences 2025 (PNAS 2025)**
-
-
-<p align="left">
-  <img src="assets/inference.gif" width="100%" /> 
+<p align="center">
+  <strong>Manifold-Constrained Nucleus-Level Denoising Diffusion Model<br />for Structure-Based Drug Design</strong>
 </p>
 
----
+<p align="center">
+  <a href="https://arxiv.org/abs/2409.10584"><img src="https://img.shields.io/badge/arXiv-2409.10584-b31b1b" alt="arXiv" /></a>
+  <a href="https://yanliang3612.github.io/NucleusDiff/"><img src="https://img.shields.io/badge/Project-Page-0A66C2" alt="Project Page" /></a>
+  <a href="https://www.pnas.org/doi/10.1073/pnas.2415666122"><img src="https://img.shields.io/badge/Paper-PNAS-B31B1B" alt="PNAS Paper" /></a>
+  <a href="https://www.caltech.edu/about/news/new-ai-model-for-drug-design-brings-more-physics-to-bear-in-predictions"><img src="https://img.shields.io/badge/Caltech-News-FF6C0C" alt="Caltech News" /></a>
+  <a href="https://doi.org/10.5281/zenodo.17093932"><img src="https://img.shields.io/badge/DOI-Zenodo-1682D4" alt="Zenodo DOI" /></a>
+</p>
+
+<p align="center">
+  The official implementation of the PNAS 2025 paper <em>Manifold-Constrained Nucleus-Level Denoising Diffusion Model for Structure-Based Drug Design</em>.
+</p>
+
+<p align="center">
+  Shengchao Liu<sup>*</sup>, Liang Yan<sup>*</sup>, Weitao Du, Weiyang Liu, Zhuoxinran Li,<br />
+  Hongyu Guo, Christian Borgs, Jennifer Chayes, Anima Anandkumar
+</p>
+
+<p align="center">
+  <strong>Proceedings of the National Academy of Sciences (PNAS), 2025</strong><br />
+  <sup>*</sup>Equal contribution
+</p>
+
+<p align="center">
+  <img src="assets/inference.gif" width="100%" alt="NucleusDiff inference process" />
+</p>
+
+## Overview
+
+NucleusDiff is a manifold-constrained denoising diffusion model for structure-based drug design. It jointly models atomic nuclei and their surrounding electron-cloud manifolds to reduce atomic collisions while generating high-affinity ligands.
+
+## Contents
+
+- [Installation](#1-installation)
+- [Data Preparation](#2-data-preparation)
+- [CrossDocked2020 Experiments](#3-crossdocked2020-experiments)
+- [Therapeutic Target Experiments](#4-therapeutic-target-experiments)
+- [Universal Inference](#5-universal-inference-for-a-specified-protein)
+- [Citation](#citation)
+
 ## 1. Installation
 
-**(Please note that we recommend using our conda environment to fully reproduce our results. If you need the all log files for evaluation results or  training process, please feel free to contact me [yanliangfdu@gmail.com](yanliangfdu@gmail.com).)**
+We recommend using the Conda environments below to reproduce our results. For full evaluation or training logs, contact [yanliangfdu@gmail.com](mailto:yanliangfdu@gmail.com).
 
-### 1.1 Dependency for main experiment
-
+### 1.1 Main experiment dependencies
 
 The code has been tested in the following environment:
 
@@ -41,7 +64,7 @@ Install via Conda and Pip:
 
 ```bash
 conda create -n "nucleusdiff" python=3.8.13
-source activate nucleusdiff
+conda activate nucleusdiff
 conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch
 pip install torch_geometric
 pip install https://data.pyg.org/whl/torch-1.12.0%2Bcu113/pyg_lib-0.3.1%2Bpt112cu113-cp38-cp38-linux_x86_64.whl
@@ -63,10 +86,13 @@ pip install transformers
 pip install meeko==0.1.dev3 scipy pdb2pqr vina==1.2.2
 python -m pip install git+https://github.com/Valdes-Tresanco-MS/AutoDockTools_py3
 ```
-The code should work with PyTorch >= 1.9.0 and PyG >= 2.0. You can change the package version according to your need.
+The code should work with PyTorch >= 1.9.0 and PyG >= 2.0. You can adjust the package versions for your environment.
 
 
-### 1.2 Dependency for preprocessing the crossdock manifold data (we present this special environment if you want to process the manifold dataset from scratch.)
+### 1.2 Manifold preprocessing dependencies
+
+Use this separate environment only if you want to process the CrossDocked manifold dataset from scratch.
+
 ```bash
 # We recommend using conda for environment management
 conda create -n Manifold python=3.7.3
@@ -114,68 +140,83 @@ pip install -e .
 
 
 ---
+
 ## 2. Data Preparation
 
-### 2.1 For Crossdock data
+### 2.1 CrossDocked2020 data
+
 1. The data used for training / evaluating the model are organized in the [nucleusdiff_data_and_checkpoint](https://drive.google.com/drive/folders/1boX4IOC-WVJ5zWLy2ulRGvDClN7ukUOe?usp=sharing) Google Drive folder.
 
-2. To train the model from scratch, you need to download the preprocessed lmdb file and split file:
-* `crossdocked_v1.1_rmsd1.0_pocket10_processed_w_manifold_data_version.lmdb`
-* `crossdocked_pocket10_pose_w_manifold_data_split.pt`
+2. To train the model from scratch, download the preprocessed LMDB and split files:
+
+   - `crossdocked_v1.1_rmsd1.0_pocket10_processed_w_manifold_data_version.lmdb`
+   - `crossdocked_pocket10_pose_w_manifold_data_split.pt`
 
 3. To evaluate the model on the test set, you need to download _and_ unzip the `test_set.zip`. It includes the original PDB files that will be used in Vina Docking.
 
 4. If you want to process the dataset from scratch, you need to download CrossDocked2020 v1.1 from [here](https://bits.csb.pitt.edu/files/crossdock2020/), save it into `./data/CrossDocked2020`, and run the scripts in `./crossdock_data_preparation`:
-* 1. [clean_crossdocked.py](./crossdock_data_preparation/step1_clean_crossdocked.py) will filter the original dataset and keep the ones with RMSD < 1A.
-It will generate a `index.pkl` file and create a new directory containing the original filtered data (corresponds to `crossdocked_v1.1_rmsd1.0.tar.gz` in the drive). *You don't need these files if you have downloaded .lmdb file.*
+
+#### Process CrossDocked2020 from scratch
+
+1. [`step1_clean_crossdocked.py`](./crossdock_data_preparation/step1_clean_crossdocked.py) filters the original dataset and keeps entries with RMSD < 1 Å. It generates `index.pkl` and a directory containing the filtered data (corresponding to `crossdocked_v1.1_rmsd1.0.tar.gz` in Google Drive). You can skip this step if you downloaded the preprocessed LMDB file.
+
 ```bash
-    python ./crossdock_data_preparation/step1_clean_crossdocked.py \
-           --source "./data/CrossDocked2020" \
-           --dest "./data/crossdocked_v1.1_rmsd1.0" \
-           --rmsd_thr 1.0
-```
-* 2. [extract_pockets.py](./crossdock_data_preparation/step2_extract_pockets.py) will clip the original protein file to a 10A region around the binding molecule. E.g.
-```bash
-    python ./crossdock_data_preparation/step2_extract_pockets.py \
-           --source "./data/crossdocked_v1.1_rmsd1.0" \
-           --dest "./data/crossdocked_v1.1_rmsd1.0_pocket10"
-```
-* 3. [split_pl_dataset.py](./crossdock_data_preparation/step3_split_pl_dataset.py) will split the training and test set. We use the same split `split_by_name.pt` as 
-[AR](https://arxiv.org/abs/2203.10446) and [Pocket2Mol](https://arxiv.org/abs/2205.07249), which can also be downloaded in the Google Drive - data folder.
-```bash
-    python ./crossdock_data_preparation/step3_split_pl_dataset.py \
-           --path "./data/crossdocked_v1.1_rmsd1.0_pocket10" \
-           --dest "./data/crossdocked_pocket10_pose_split.pt" \
-           --fixed_split "./data/split_by_name.pt"
+python ./crossdock_data_preparation/step1_clean_crossdocked.py \
+       --source "./data/CrossDocked2020" \
+       --dest "./data/crossdocked_v1.1_rmsd1.0" \
+       --rmsd_thr 1.0
 ```
 
-### 2.2 For Crossdock manifold data
-1. switch conda virtual environments
+2. [`step2_extract_pockets.py`](./crossdock_data_preparation/step2_extract_pockets.py) clips each protein file to a 10 Å region around the binding molecule.
+
 ```bash
-source activate Manifold
+python ./crossdock_data_preparation/step2_extract_pockets.py \
+       --source "./data/crossdocked_v1.1_rmsd1.0" \
+       --dest "./data/crossdocked_v1.1_rmsd1.0_pocket10"
 ```
 
-2. prepare input for MSMS
+3. [`step3_split_pl_dataset.py`](./crossdock_data_preparation/step3_split_pl_dataset.py) creates the training and test splits. We use the same `split_by_name.pt` as [AR](https://arxiv.org/abs/2203.10446) and [Pocket2Mol](https://arxiv.org/abs/2205.07249); it is also available in the Google Drive data folder.
+
+```bash
+python ./crossdock_data_preparation/step3_split_pl_dataset.py \
+       --path "./data/crossdocked_v1.1_rmsd1.0_pocket10" \
+       --dest "./data/crossdocked_pocket10_pose_split.pt" \
+       --fixed_split "./data/split_by_name.pt"
+```
+
+### 2.2 CrossDocked manifold data
+
+1. Activate the manifold preprocessing environment:
+
+```bash
+conda activate Manifold
+```
+
+2. Prepare input for MSMS:
+
 ```bash
 python step1_convert_npz_to_xyzrn.py \
        --crossdock_source [path/to/crossdock_pocket10_auxdata/] \
        --out_root "./data/crossdocked_pocket10_mesh"
 ```
 
-3. execute MSMS to generate molecular surface
+3. Run MSMS to generate molecular surfaces:
+
 ```bash
 python step2_compute_msms.py \
        --data_root "./data/crossdocked_pocket10_mesh" \
        --msms-bin [path/to/MSMS/dir]/msms.x86_64Linux2.2.6.1 
 ```
 
-4. refine surface mesh
+4. Refine the surface meshes:
+
 ```bash
 python step3_refine_mesh.py \
        --data_root "./data/crossdocked_pocket10_mesh"
 ```
 
-### 2.3 Get our final lmdb data and split.pt data
+### 2.3 Generate the final LMDB and split files
+
 ```bash
 python ./datasets/pl_pair_dataset.py \
        --data_root "./data/crossdocked_v1.1_rmsd1.0_pocket10"
@@ -183,21 +224,23 @@ python ./datasets/pl_pair_dataset.py \
 
 ---
 
-## 3. Main experiment
+## 3. CrossDocked2020 Experiments
 
 ### 3.1 Training
+
 ```bash
 python train.py \
        --lr 0.001 \
        --device "cuda:0" \
-       --wandb_project_name "nucleusdiff_train" \ 
+       --wandb_project_name "nucleusdiff_train" \
        --loss_mesh_constained_weight 1
 ```
 
-**Notice:** our pretrained model are organized in the [nucleusdiff_data_and_checkpoint](https://drive.google.com/drive/folders/1boX4IOC-WVJ5zWLy2ulRGvDClN7ukUOe?usp=sharing) Google Drive folder.
+**Note:** Our pretrained models are available in the [nucleusdiff_data_and_checkpoint](https://drive.google.com/drive/folders/1boX4IOC-WVJ5zWLy2ulRGvDClN7ukUOe?usp=sharing) Google Drive folder.
 
 
-### 3.2 Inference (sampling)
+### 3.2 Inference
+
 ```bash
 python sample_for_crossdock.py \
        --ckpt_path "./logs_diffusion/nucleusdiff_train" \
@@ -207,6 +250,7 @@ python sample_for_crossdock.py \
 ```
 
 You can also speed up sampling with multiple GPUs, e.g.:
+
 ```bash
 python sample_for_crossdock.py \
        --ckpt_path "./logs_diffusion/nucleusdiff_train" \
@@ -233,16 +277,18 @@ python sample_for_crossdock.py \
        --data_id 3 
 ```
 
-### 3.3 Evaluation on the General Metrics 
+### 3.3 General metrics
+
 ```bash
-python ./evaluation/evaluate_for_crossdock_on_collision_metrics.py \
+python ./evaluation/evaluate_for_crossdock_on_general_metrics.py \
         --sample_path "./result_output" \
         --eval_step -1 \
         --protein_root "./data/test_set" \
         --docking_mode "vina_dock"
 ```
 
-### 3.4 Evaluation on the Collision Metrics 
+### 3.4 Collision metrics
+
 ```bash
 python ./evaluation/evaluate_for_crossdock_on_collision_metrics.py \
         --sample_path "./result_output" \
@@ -251,9 +297,9 @@ python ./evaluation/evaluate_for_crossdock_on_collision_metrics.py \
 
 ---
 
-## 4. Advances in Drug Design for COVID-19 and Other Therapeutic Targets
+## 4. Therapeutic Target Experiments
 
-### 4.1 Data Preparation
+### 4.1 Data preparation
 
 If you want to process the dataset from scratch, you need to download `real_world.zip` from [nucleusdiff_data_and_checkpoint](https://drive.google.com/drive/folders/1boX4IOC-WVJ5zWLy2ulRGvDClN7ukUOe?usp=sharing), save it into `./data`, and run the scripts in `./covid_19_data_preparation`:
 
@@ -262,7 +308,8 @@ python ./covid_19_data_preparation/extract_pockets_for_real_world.py \
         --source "./data/real_world" \
         --dest "./real_world_test_extract_pockets"
 ```
-### 4.2 Inference (sampling)
+
+### 4.2 Inference
 
 ```bash
 python sample_for_covid_19.py \
@@ -273,7 +320,8 @@ python sample_for_covid_19.py \
         --inference_num_atoms 30
 ```
 
-### 4.3 Evaluation on the General Metrics 
+### 4.3 General metrics
+
 ```bash
 python ./evaluation/evaluate_for_covid_19_on_general_metrics.py \
         --sample_path "./read_world_cdk2_test" \
@@ -282,7 +330,7 @@ python ./evaluation/evaluate_for_covid_19_on_general_metrics.py \
         --docking_mode "vina_dock"
 ```
 
-### 4.4 Evaluation on the Collision Metrics 
+### 4.4 Collision metrics
 
 ```bash
 python ./evaluation/evaluate_for_covid_19_on_collision_metrics.py \
@@ -295,12 +343,14 @@ python ./evaluation/evaluate_for_covid_19_on_collision_metrics.py \
 
 Use `sample_for_specific_protein.py` to generate ligands for an arbitrary single protein pocket PDB.
 
-### 5.1 Input Preparation
+### 5.1 Input preparation
+
 1. Prepare a pocket PDB centered at the binding site (e.g., 10 Å around the ligand or binding residues).  
    You may reuse the script in 4.1: `./covid_19_data_preparation/extract_pockets_for_real_world.py`.
 2. Example pocket file: `./specific_protein/3cl_ligand_pocket10.pdb`.
 
-### 5.2 Inference (sampling)
+### 5.2 Inference
+
 ```bash
 python sample_for_specific_protein.py \
         --checkpoint ./checkpoints/nucleusdiff_pretrained_model.pt \
@@ -314,6 +364,7 @@ python sample_for_specific_protein.py \
 ```
 
 Key arguments:
+
 - `--checkpoint`: path to a NucleusDiff checkpoint (`.pt`).
 - `--pdb_path`: pocket PDB for your target protein.
 - `--result_path`: output directory.
@@ -324,17 +375,19 @@ Key arguments:
 - `--device`: GPU device, e.g., `cuda:0`.
 
 ### 5.3 Outputs
+
 - `${result_path}/sample_{test_time}.pt`: raw tensors and sampling trajectories.
 - `${result_path}/sdf/*.sdf`: reconstructed molecules in SDF format.
 
 Run `python sample_for_specific_protein.py --help` for the complete list of options and defaults.
 
 ---
-## Cite Us 
 
-Feel free to cite this work if you find it useful to you!
+## Citation
 
-```bash
+If you find this work useful, please cite:
+
+```bibtex
 @article{liu2025manifold,
   title={Manifold-constrained nucleus-level denoising diffusion model for structure-based drug design},
   author={Liu, Shengchao and Yan, Liang and Du, Weitao and Liu, Weiyang and Li, Zhuoxinran and Guo, Hongyu and Borgs, Christian and Chayes, Jennifer and Anandkumar, Anima},
