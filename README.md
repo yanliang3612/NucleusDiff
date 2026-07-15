@@ -13,8 +13,8 @@
 </p>
 
 <p align="center">
-  Shengchao Liu<sup>*</sup>, Liang Yan<sup>*</sup>, Weitao Du, Weiyang Liu, Zhuoxinran Li,<br />
-  Hongyu Guo, Christian Borgs, Jennifer Chayes, Anima Anandkumar
+  Shengchao Liu<sup>*</sup>, Liang Yan<sup>*</sup>, Weitao Du, Weiyang Liu, Zhuoxinran Li, Hongyu Guo,<br />
+  Christian Borgs, Jennifer Chayes, Anima Anandkumar
 </p>
 
 <p align="center">
