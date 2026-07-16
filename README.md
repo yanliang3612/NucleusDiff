@@ -50,6 +50,7 @@
 - **2025-09-10** · 💻 **Code open sourced.** We released the official NucleusDiff implementation as [v1.0.0 on GitHub](https://github.com/yanliang3612/NucleusDiff/releases/tag/v1.0.0).
 - **2025-10-20** · 📰 **Featured by Caltech News.** Caltech highlighted NucleusDiff in [“New AI Model for Drug Design Brings More Physics to Bear in Predictions”](https://www.caltech.edu/about/news/new-ai-model-for-drug-design-brings-more-physics-to-bear-in-predictions).
 - **2026-07-16** · 💬 **SciGenAI Slack channel launched.** We opened a dedicated NucleusDiff channel for real-time questions, discussions, code contributions, and collaboration. [Join the SciGenAI Slack community](https://join.slack.com/t/matdiscoverai/shared_invite/zt-32kktcuk0-XaaJT2P9qZTfNdaCzJUGAg)—everyone is welcome!
+- **2026-07-16** · 🧹 **Codebase cleanup.** We cleaned 17 Python files by removing unused imports and variable bindings, organizing imports, simplifying redundant string formatting, removing obsolete comments, and trimming trailing whitespace. This maintenance update does **not** change the model architecture, numerical computations, command-line defaults, or any data, training, evaluation, and inference logic. See [commit `1cde91c`](https://github.com/yanliang3612/NucleusDiff/commit/1cde91c).
 
 ## Overview
 
