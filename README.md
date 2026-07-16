@@ -41,12 +41,24 @@
   <img src="assets/inference.gif" width="100%" alt="NucleusDiff inference process" />
 </p>
 
+## Update & News
+
+- **2024-06-18 — Project page launched.** Explore the model, visualizations, paper, and code on the [NucleusDiff project page](https://yanliang3612.github.io/NucleusDiff/).
+- **2024-09-16 — arXiv v1 released.** The first preprint of NucleusDiff is available as [arXiv:2409.10584v1](https://arxiv.org/abs/2409.10584v1).
+- **2024-09-30 — arXiv v2 released.** The revised preprint is available as [arXiv:2409.10584v2](https://arxiv.org/abs/2409.10584v2).
+- **2025-08-11 — Accepted by PNAS.** NucleusDiff was accepted by the *Proceedings of the National Academy of Sciences*; read the [PNAS paper](https://www.pnas.org/doi/10.1073/pnas.2415666122).
+- **2025-09-10 — Code open sourced.** We released the official NucleusDiff implementation as [v1.0.0 on GitHub](https://github.com/yanliang3612/NucleusDiff/releases/tag/v1.0.0).
+- **2025-10-20 — Featured by Caltech News.** Caltech highlighted NucleusDiff in [“New AI Model for Drug Design Brings More Physics to Bear in Predictions”](https://www.caltech.edu/about/news/new-ai-model-for-drug-design-brings-more-physics-to-bear-in-predictions).
+- **2026-07-16 — SciGenAI Slack channel launched.** We opened a dedicated NucleusDiff channel for real-time questions, discussions, code contributions, and collaboration. [Join the SciGenAI Slack community](https://join.slack.com/t/matdiscoverai/shared_invite/zt-32kktcuk0-XaaJT2P9qZTfNdaCzJUGAg)—everyone is welcome!
+
 ## Overview
 
 NucleusDiff is a manifold-constrained denoising diffusion model for structure-based drug design. It jointly models atomic nuclei and their surrounding electron-cloud manifolds to reduce atomic collisions while generating high-affinity ligands.
 
 ## Contents
 
+- [Update & News](#update--news)
+- [Overview](#overview)
 - [Installation](#1-installation)
 - [Data Preparation](#2-data-preparation)
 - [CrossDocked2020 Experiments](#3-crossdocked2020-experiments)
