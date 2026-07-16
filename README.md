@@ -6,6 +6,7 @@
   <a href="https://www.pnas.org/doi/10.1073/pnas.2415666122"><img src="https://img.shields.io/badge/Paper-PNAS-B31B1B" alt="PNAS Paper" /></a>
   <a href="https://www.caltech.edu/about/news/new-ai-model-for-drug-design-brings-more-physics-to-bear-in-predictions"><img src="https://img.shields.io/badge/Caltech-News-FF6C0C" alt="Caltech News" /></a>
   <a href="https://doi.org/10.5281/zenodo.17093932"><img src="https://img.shields.io/badge/DOI-Zenodo-1682D4" alt="Zenodo DOI" /></a>
+  <a href="https://huggingface.co/LiangYan3612/NucleusDiff"><img src="https://img.shields.io/badge/Hugging_Face-Model_%26_Data-FFD21E?logo=huggingface&amp;logoColor=black" alt="NucleusDiff model and data on Hugging Face" /></a>
   <a href="https://join.slack.com/t/matdiscoverai/shared_invite/zt-32kktcuk0-XaaJT2P9qZTfNdaCzJUGAg"><img src="https://img.shields.io/badge/Slack-Join_SciGenAI-4A154B?logo=slack&amp;logoColor=white" alt="Join SciGenAI on Slack" /></a>
 </p>
 
@@ -51,15 +52,59 @@
 - **2025-10-20** · 📰 **Featured by Caltech News.** Caltech highlighted NucleusDiff in [“New AI Model for Drug Design Brings More Physics to Bear in Predictions”](https://www.caltech.edu/about/news/new-ai-model-for-drug-design-brings-more-physics-to-bear-in-predictions).
 - **2026-07-16** · 💬 **SciGenAI Slack channel launched.** We opened a dedicated NucleusDiff channel for real-time questions, discussions, code contributions, and collaboration. [Join the SciGenAI Slack community](https://join.slack.com/t/matdiscoverai/shared_invite/zt-32kktcuk0-XaaJT2P9qZTfNdaCzJUGAg)—everyone is welcome!
 - **2026-07-16** · 🧹 **Codebase cleanup.** We cleaned 17 Python files by removing unused imports and variable bindings, organizing imports, simplifying redundant string formatting, removing obsolete comments, and trimming trailing whitespace. This maintenance update does **not** change the model architecture, numerical computations, command-line defaults, or any data, training, evaluation, and inference logic. See [commit `1cde91c`](https://github.com/yanliang3612/NucleusDiff/commit/1cde91c).
+- **2026-07-16** · 🤗 **Hugging Face mirror released.** The pretrained checkpoint and all project data artifacts are now available from the [NucleusDiff Hugging Face repository](https://huggingface.co/LiangYan3612/NucleusDiff).
 
 ## Overview
 
 NucleusDiff is a manifold-constrained denoising diffusion model for structure-based drug design. It jointly models atomic nuclei and their surrounding electron-cloud manifolds to reduce atomic collisions while generating high-affinity ligands.
 
+## Model & Data Downloads
+
+The pretrained checkpoint and data artifacts are hosted in the [NucleusDiff Hugging Face repository](https://huggingface.co/LiangYan3612/NucleusDiff). Google Drive remains available as a [backup mirror](https://drive.google.com/drive/folders/1boX4IOC-WVJ5zWLy2ulRGvDClN7ukUOe?usp=sharing).
+
+Install the Hugging Face CLI:
+
+```bash
+pip install -U huggingface_hub
+```
+
+Run the following commands from the NucleusDiff repository root. The original `model/` and `data/` directory structure will be preserved.
+
+Download the pretrained checkpoint:
+
+```bash
+hf download LiangYan3612/NucleusDiff \
+   model/nucleusdiff_pretrained_model.pt \
+   --local-dir .
+```
+
+Download all data artifacts:
+
+```bash
+hf download LiangYan3612/NucleusDiff \
+   --include "data/*" \
+   --local-dir .
+```
+
+Hugging Face repository layout:
+
+| Type | Path | Description |
+|---|---|---|
+| Checkpoint | [`model/nucleusdiff_pretrained_model.pt`](https://huggingface.co/LiangYan3612/NucleusDiff/blob/main/model/nucleusdiff_pretrained_model.pt) | Pretrained NucleusDiff model |
+| Training data | [`data/crossdocked_v1.1_rmsd1.0_pocket10_processed_w_manifold_data_version.lmdb`](https://huggingface.co/LiangYan3612/NucleusDiff/blob/main/data/crossdocked_v1.1_rmsd1.0_pocket10_processed_w_manifold_data_version.lmdb) | Preprocessed CrossDocked manifold LMDB |
+| Data split | [`data/crossdocked_pocket10_pose_w_manifold_data_split.pt`](https://huggingface.co/LiangYan3612/NucleusDiff/blob/main/data/crossdocked_pocket10_pose_w_manifold_data_split.pt) | NucleusDiff train/validation/test split |
+| Filtered data | [`data/crossdocked_v1.1_rmsd1.0.tar.gz`](https://huggingface.co/LiangYan3612/NucleusDiff/blob/main/data/crossdocked_v1.1_rmsd1.0.tar.gz) | Filtered CrossDocked structures |
+| Reference split | [`data/split_by_name.pt`](https://huggingface.co/LiangYan3612/NucleusDiff/blob/main/data/split_by_name.pt) | Reference CrossDocked split |
+| Docking test set | [`data/test_set.zip`](https://huggingface.co/LiangYan3612/NucleusDiff/blob/main/data/test_set.zip) | Protein test set for docking evaluation |
+| Therapeutic targets | [`data/real_world.zip`](https://huggingface.co/LiangYan3612/NucleusDiff/blob/main/data/real_world.zip) | Therapeutic-target evaluation data |
+| Metadata | [`data/affinity_info.pkl`](https://huggingface.co/LiangYan3612/NucleusDiff/blob/main/data/affinity_info.pkl) | Affinity metadata |
+| Metadata | [`data/test_vina_crossdock_dict.pkl`](https://huggingface.co/LiangYan3612/NucleusDiff/blob/main/data/test_vina_crossdock_dict.pkl) | CrossDocked Vina evaluation metadata |
+
 ## Contents
 
 - [Update & News](#update--news)
 - [Overview](#overview)
+- [Model & Data Downloads](#model--data-downloads)
 - [Installation](#1-installation)
 - [Data Preparation](#2-data-preparation)
 - [CrossDocked2020 Experiments](#3-crossdocked2020-experiments)
@@ -170,7 +215,7 @@ pip install -e .
 
 ### 2.1 CrossDocked2020 data
 
-1. The data used for training / evaluating the model are organized in the [nucleusdiff_data_and_checkpoint](https://drive.google.com/drive/folders/1boX4IOC-WVJ5zWLy2ulRGvDClN7ukUOe?usp=sharing) Google Drive folder.
+1. Download the training and evaluation files from the [NucleusDiff Hugging Face data directory](https://huggingface.co/LiangYan3612/NucleusDiff/tree/main/data). The original [Google Drive folder](https://drive.google.com/drive/folders/1boX4IOC-WVJ5zWLy2ulRGvDClN7ukUOe?usp=sharing) is retained as a backup mirror.
 
 2. To train the model from scratch, download the preprocessed LMDB and split files:
 
@@ -261,7 +306,7 @@ python train.py \
        --loss_mesh_constained_weight 1
 ```
 
-**Note:** Our pretrained models are available in the [nucleusdiff_data_and_checkpoint](https://drive.google.com/drive/folders/1boX4IOC-WVJ5zWLy2ulRGvDClN7ukUOe?usp=sharing) Google Drive folder.
+**Note:** The pretrained checkpoint is available from [Hugging Face](https://huggingface.co/LiangYan3612/NucleusDiff/blob/main/model/nucleusdiff_pretrained_model.pt), with [Google Drive](https://drive.google.com/drive/folders/1boX4IOC-WVJ5zWLy2ulRGvDClN7ukUOe?usp=sharing) retained as a backup mirror.
 
 
 ### 3.2 Inference
@@ -326,7 +371,7 @@ python ./evaluation/evaluate_for_crossdock_on_collision_metrics.py \
 
 ### 4.1 Data preparation
 
-If you want to process the dataset from scratch, you need to download `real_world.zip` from [nucleusdiff_data_and_checkpoint](https://drive.google.com/drive/folders/1boX4IOC-WVJ5zWLy2ulRGvDClN7ukUOe?usp=sharing), save it into `./data`, and run the scripts in `./covid_19_data_preparation`:
+If you want to process the dataset from scratch, download [`data/real_world.zip`](https://huggingface.co/LiangYan3612/NucleusDiff/blob/main/data/real_world.zip), extract it into `./data`, and run the scripts in `./covid_19_data_preparation`:
 
 ```bash
 python ./covid_19_data_preparation/extract_pockets_for_real_world.py \
@@ -378,7 +423,7 @@ Use `sample_for_specific_protein.py` to generate ligands for an arbitrary single
 
 ```bash
 python sample_for_specific_protein.py \
-        --checkpoint ./checkpoints/nucleusdiff_pretrained_model.pt \
+        --checkpoint ./model/nucleusdiff_pretrained_model.pt \
         --pdb_path ./specific_protein/3cl_ligand_pocket10.pdb \
         --result_path ./results_specific_protein \
         --sample_num_atoms real_world_testing \
