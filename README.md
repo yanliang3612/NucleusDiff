@@ -44,15 +44,17 @@
 
 ## Update & News
 
-- **2024-06-18** · 🌐 **Project page launched.** Explore the model, visualizations, paper, and code on the [NucleusDiff project page](https://yanliang3612.github.io/NucleusDiff/).
-- **2024-09-16** · 📄 **arXiv v1 released.** The first preprint of NucleusDiff is available as [arXiv:2409.10584v1](https://arxiv.org/abs/2409.10584v1).
-- **2024-09-30** · 🔄 **arXiv v2 released.** The revised preprint is available as [arXiv:2409.10584v2](https://arxiv.org/abs/2409.10584v2).
-- **2025-08-11** · 🎉 **Accepted by PNAS.** NucleusDiff was accepted by the *Proceedings of the National Academy of Sciences*; read the [PNAS paper](https://www.pnas.org/doi/10.1073/pnas.2415666122).
-- **2025-09-10** · 💻 **Code open sourced.** We released the official NucleusDiff implementation as [v1.0.0 on GitHub](https://github.com/yanliang3612/NucleusDiff/releases/tag/v1.0.0).
-- **2025-10-20** · 📰 **Featured by Caltech News.** Caltech highlighted NucleusDiff in [“New AI Model for Drug Design Brings More Physics to Bear in Predictions”](https://www.caltech.edu/about/news/new-ai-model-for-drug-design-brings-more-physics-to-bear-in-predictions).
-- **2026-07-16** · 💬 **SciGenAI Slack channel launched.** We opened a dedicated NucleusDiff channel for real-time questions, discussions, code contributions, and collaboration. [Join the SciGenAI Slack community](https://join.slack.com/t/matdiscoverai/shared_invite/zt-32kktcuk0-XaaJT2P9qZTfNdaCzJUGAg)—everyone is welcome!
-- **2026-07-16** · 🧹 **Codebase cleanup.** We cleaned 17 Python files by removing unused imports and variable bindings, organizing imports, simplifying redundant string formatting, removing obsolete comments, and trimming trailing whitespace. This maintenance update does **not** change the model architecture, numerical computations, command-line defaults, or any data, training, evaluation, and inference logic. See [commit `1cde91c`](https://github.com/yanliang3612/NucleusDiff/commit/1cde91c).
-- **2026-07-16** · 🤗 **Hugging Face mirror released.** The pretrained checkpoint and all project data artifacts are now available from the [NucleusDiff Hugging Face repository](https://huggingface.co/LiangYan3612/NucleusDiff).
+| Date | Icon | Update |
+| :---: | :---: | :--- |
+| **2024-06-18** | 🌐 | **Project page launched.** Explore the model, visualizations, paper, and code on the [NucleusDiff project page](https://yanliang3612.github.io/NucleusDiff/). |
+| **2024-09-16** | 📄 | **arXiv v1 released.** The first preprint of NucleusDiff is available as [arXiv:2409.10584v1](https://arxiv.org/abs/2409.10584v1). |
+| **2024-09-30** | 🔄 | **arXiv v2 released.** The revised preprint is available as [arXiv:2409.10584v2](https://arxiv.org/abs/2409.10584v2). |
+| **2025-08-11** | 🎉 | **Accepted by PNAS.** NucleusDiff was accepted by the *Proceedings of the National Academy of Sciences*; read the [PNAS paper](https://www.pnas.org/doi/10.1073/pnas.2415666122). |
+| **2025-09-10** | 💻 | **Code open sourced.** We released the official NucleusDiff implementation as [v1.0.0 on GitHub](https://github.com/yanliang3612/NucleusDiff/releases/tag/v1.0.0). |
+| **2025-10-20** | 📰 | **Featured by Caltech News.** Caltech highlighted NucleusDiff in [“New AI Model for Drug Design Brings More Physics to Bear in Predictions”](https://www.caltech.edu/about/news/new-ai-model-for-drug-design-brings-more-physics-to-bear-in-predictions). |
+| **2026-07-16** | 🧹 | **Codebase cleanup.** We cleaned 17 Python files by removing unused imports and variable bindings, organizing imports, simplifying redundant string formatting, removing obsolete comments, and trimming trailing whitespace. This maintenance update does **not** change the model architecture, numerical computations, command-line defaults, or any data, training, evaluation, and inference logic. See [commit `1cde91c`](https://github.com/yanliang3612/NucleusDiff/commit/1cde91c). |
+| **2026-07-16** | 🤗 | **Hugging Face mirror released.** The pretrained checkpoint and all project data artifacts are now available from the [NucleusDiff Hugging Face repository](https://huggingface.co/LiangYan3612/NucleusDiff). |
+| **2026-07-16** | 💬 | **SciGenAI Slack channel launched.** We opened a dedicated NucleusDiff channel for real-time questions, discussions, code contributions, and collaboration. [Join the SciGenAI Slack community](https://join.slack.com/t/matdiscoverai/shared_invite/zt-32kktcuk0-XaaJT2P9qZTfNdaCzJUGAg)—everyone is welcome! |
 
 ## Overview
 
