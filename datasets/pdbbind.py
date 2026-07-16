@@ -95,7 +95,7 @@ class PDBBindDataset(Dataset):
                 #     print('Skipping (%d) %s' % (num_skipped, ligand_fn, ))
                 #     continue
         print('num_skipped: ', num_skipped)
-    
+
     def __len__(self):
         if self.db is None:
             self._connect_db()
@@ -122,7 +122,7 @@ class PDBBindDataset(Dataset):
                 stats.entropy(torch.softmax(emb['pred_ligand_v'], dim=-1).numpy(), axis=-1)).view(-1, 1)
 
         return data
-        
+
 
 if __name__ == '__main__':
     import argparse

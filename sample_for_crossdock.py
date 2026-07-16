@@ -1,13 +1,13 @@
 import argparse
 import os
-import shutil
 import time
+from types import SimpleNamespace
 
 import numpy as np
 import torch
 from torch_geometric.data import Batch
 from torch_geometric.transforms import Compose
-from torch_scatter import scatter_sum, scatter_mean
+from torch_scatter import scatter_mean, scatter_sum
 from tqdm.auto import tqdm
 
 import utils.misc as misc
@@ -16,7 +16,6 @@ from datasets import get_mesh_dataset
 from datasets.pl_data import FOLLOW_BATCH
 from models.molopt_score_model import ScorePosNet3D, log_sample_categorical
 from utils.evaluation import atom_num
-from types import SimpleNamespace
 
 
 def unbatch_v_traj(ligand_v_traj, n_data, ligand_cum_atoms):
@@ -151,14 +150,14 @@ def sample_in_one_device(args, ckpt_path, result_path, device):
 
 
     # Load dataset
-    dataset, subsets = get_mesh_dataset(
+    _, subsets = get_mesh_dataset(
         name=SimpleNamespace(**ckpt['config']).data_name,
         path=SimpleNamespace(**ckpt['config']).data_path,
         split_path=SimpleNamespace(**ckpt['config']).data_split,
         transform=transform
     )
 
-    train_set, test_set = subsets['train'], subsets['val']
+    test_set = subsets['val']
     logger.info(f'Successfully load the dataset (size: {len(test_set)})!')
 
 

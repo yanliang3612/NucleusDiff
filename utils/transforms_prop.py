@@ -29,7 +29,7 @@ class FeaturizeProteinAtom(object):
 
 
 class FeaturizeLigandAtom(object):
-    
+
     def __init__(self):
         super().__init__()
         self.atomic_numbers = torch.LongTensor([1, 6, 7, 8, 9, 15, 16, 17])  # H, C, N, O, F, P, S, Cl
@@ -98,13 +98,13 @@ class LigandCountNeighbors(object):
 
     def __call__(self, data):
         data.ligand_num_neighbors = self.count_neighbors(
-            data.ligand_bond_index, 
+            data.ligand_bond_index,
             symmetry=True,
             num_nodes=data.ligand_element.size(0),
         )
         data.ligand_atom_valence = self.count_neighbors(
-            data.ligand_bond_index, 
-            symmetry=True, 
+            data.ligand_bond_index,
+            symmetry=True,
             valence=data.ligand_bond_type,
             num_nodes=data.ligand_element.size(0),
         )

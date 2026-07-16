@@ -1,9 +1,15 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torch_geometric.nn import knn_graph
 from torch_scatter import scatter_sum
-from torch_geometric.nn import radius_graph, knn_graph
-from models.common import GaussianSmearing, MLP, batch_hybrid_edge_connection, NONLINEARITIES
+
+from models.common import (
+    MLP,
+    NONLINEARITIES,
+    GaussianSmearing,
+    batch_hybrid_edge_connection,
+)
 
 
 class EnBaseLayer(nn.Module):

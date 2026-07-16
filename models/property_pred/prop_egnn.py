@@ -1,8 +1,9 @@
 import torch
 import torch.nn as nn
+from torch_geometric.nn import knn_graph
 from torch_scatter import scatter_sum
-from torch_geometric.nn import radius_graph, knn_graph
-from models.common import GaussianSmearing, MLP
+
+from models.common import MLP, GaussianSmearing
 
 
 class EnBaseLayer(nn.Module):

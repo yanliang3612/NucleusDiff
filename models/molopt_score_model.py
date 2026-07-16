@@ -2,14 +2,13 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch_scatter import scatter_sum, scatter_mean
+from torch_scatter import scatter_mean
 from tqdm.auto import tqdm
 
-from models.common import compose_context, ShiftedSoftplus
+from collision_test.utils.data import vdw_radii_dict
+from models.common import ShiftedSoftplus, compose_context
 from models.egnn import EGNN
 from models.uni_transformer import UniTransformerO2TwoUpdateGeneral
-from collision_test.utils.data import vdw_radii_dict
-
 
 
 def get_refine_net(refine_net_type, config):
@@ -2127,7 +2126,7 @@ class ScorePosNet3D(nn.Module):
 
         loss_pos = scatter_mean(((pred - target) ** 2).sum(-1), batch_ligand, dim=0)
         loss_pos = torch.mean(loss_pos)
-        
+
         loss_mesh_pos = scatter_mean(((pred_mesh - target_mesh) ** 2).sum(-1), batch_ligand_mesh, dim=0)
         loss_mesh_pos = torch.mean(loss_mesh_pos)
 

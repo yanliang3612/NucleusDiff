@@ -1,11 +1,5 @@
-import torch
-import torch.nn.functional as F
-import numpy as np
-
-
-# from utils import data as utils_data
-
 from collision_test.utils import data as utils_data
+
 AROMATIC_FEAT_MAP_IDX = utils_data.ATOM_FAMILIES_ID['Aromatic']
 
 # only atomic number 1, 6, 7, 8, 9, 15, 16, 17 exist
@@ -111,5 +105,4 @@ def get_index(atom_num, hybridization, is_aromatic, mode):
             return MAP_ATOM_TYPE_AROMATIC_TO_INDEX[(1, False)]
     else:
         return MAP_ATOM_TYPE_FULL_TO_INDEX[(int(atom_num), str(hybridization), bool(is_aromatic))]
-
 

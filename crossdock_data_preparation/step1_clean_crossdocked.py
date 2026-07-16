@@ -22,7 +22,7 @@ if __name__ == '__main__':
         for ln in tqdm(f.readlines()):
             _, _, rmsd, protein_fn, ligand_fn, _ = ln.split()
             rmsd = float(rmsd)
-            if rmsd > args.rmsd_thr: 
+            if rmsd > args.rmsd_thr:
                 continue
 
             ligand_id = int(ligand_fn[ligand_fn.rfind('_')+1:ligand_fn.rfind('.')])

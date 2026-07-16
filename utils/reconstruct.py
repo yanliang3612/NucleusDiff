@@ -69,8 +69,8 @@ def make_obmol(xyz, atomic_numbers):
 
 def connect_the_dots(mol, atoms, indicators, covalent_factor=1.3):
     '''Custom implementation of ConnectTheDots.  This is similar to
-    OpenBabel's version, but is more willing to make long bonds 
-    (up to maxbond long) to keep the molecule connected.  It also 
+    OpenBabel's version, but is more willing to make long bonds
+    (up to maxbond long) to keep the molecule connected.  It also
     attempts to respect atom type information from struct.
     atoms and struct need to correspond in their order
     Assumes no hydrogens or existing bonds.
@@ -344,10 +344,10 @@ def fixup(atoms, mol, indicators):
         #         if atom.GetHvyDegree() == 1 and atom.GetAtomicNum() == 7:
         #             atom.SetImplicitHCount(2)
         #         else:
-        #             atom.SetImplicitHCount(1) 
+        #             atom.SetImplicitHCount(1)
 
         # elif ind[ATOM_FAMILIES_ID['Acceptor']]: # NOT AcceptorDonor because of else
-        #     atom.SetImplicitHCount(0)   
+        #     atom.SetImplicitHCount(0)
 
         if (atom.GetAtomicNum() in (7, 8)) and atom.IsInRing():  # Nitrogen, Oxygen
             # this is a little iffy, ommitting until there is more evidence it is a net positive

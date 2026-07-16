@@ -25,7 +25,7 @@ def process_item(item, args):
         pdb_block_pocket = protein.residues_to_pdb_block(
             protein.query_residues_ligand(ligand, args.radius)
         )
-        
+
         ligand_fn = item[1]
         pocket_fn = ligand_fn[:-4] + '_pocket%d.pdb' % args.radius
         ligand_dest = os.path.join(args.dest, ligand_fn)

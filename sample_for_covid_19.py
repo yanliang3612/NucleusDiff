@@ -1,8 +1,9 @@
 import argparse
 import os
-import shutil
+from types import SimpleNamespace
 
 import torch
+from rdkit import Chem
 from torch_geometric.transforms import Compose
 
 import utils.misc as misc
@@ -10,10 +11,8 @@ import utils.transforms as trans
 from datasets.pl_data import ProteinLigandData, torchify_dict
 from models.molopt_score_model import ScorePosNet3D
 from sample_for_crossdock import sample_diffusion_ligand
-from utils.data import PDBProtein
 from utils import reconstruct
-from rdkit import Chem
-from types import SimpleNamespace
+from utils.data import PDBProtein
 
 
 def pdb_to_pocket_data(pdb_path):
@@ -87,7 +86,7 @@ if __name__ == '__main__':
         pos_only=args.pos_only,
         center_pos_mode=args.center_pos_mode,
         sample_num_atoms=args.sample_num_atoms,
-        inference_num_atoms = args.inference_num_atoms
+        inference_num_atoms=args.inference_num_atoms
     )
     result = {
         'data': data,
@@ -124,9 +123,8 @@ if __name__ == '__main__':
 
     result_path = args.result_path
     os.makedirs(result_path, exist_ok=True)
-    # shutil.copyfile(args.config, os.path.join(result_path, 'sample.yml'))
     torch.save(result, os.path.join(result_path, f'sample_{args.test_time}.pt'))
-    mols_save_path = os.path.join(result_path, f'sdf')
+    mols_save_path = os.path.join(result_path, 'sdf')
     os.makedirs(mols_save_path, exist_ok=True)
     for idx, mol in enumerate(gen_mols):
         if mol is not None:
@@ -134,4 +132,3 @@ if __name__ == '__main__':
             sdf_writer.write(mol)
             sdf_writer.close()
     logger.info(f'Results are saved in {result_path}')
-

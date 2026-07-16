@@ -1,19 +1,18 @@
 import argparse
 import os
-import pickle
+from collections import Counter
+from glob import glob
 
 import numpy as np
-from rdkit import Chem, DataStructs
-from rdkit import RDLogger
 import torch
+from rdkit import Chem, DataStructs, RDLogger
 from tqdm.auto import tqdm
-from glob import glob
-from collections import Counter
 
-from utils.evaluation import eval_atom_type, scoring_func, analyze, eval_bond_length
 from utils import misc, reconstruct, transforms
+from utils.evaluation import analyze, eval_atom_type, eval_bond_length, scoring_func
 from utils.evaluation.docking_qvina import QVinaDockingTask
 from utils.evaluation.docking_vina import VinaDockingTask
+
 
 def tanimoto_sim(mol, ref):
     fp1 = Chem.RDKFingerprint(ref)

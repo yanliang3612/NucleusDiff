@@ -1,32 +1,31 @@
 import argparse
-import wandb
 import os
+from collections import Counter
 
 import numpy as np
 import torch
 import torch.utils.tensorboard
+import wandb
+from pytorch_lightning import seed_everything
+from rdkit import Chem, RDLogger
 from sklearn.metrics import roc_auc_score
 from torch.nn.utils import clip_grad_norm_
 from torch_geometric.loader import DataLoader
 from torch_geometric.transforms import Compose
 from tqdm.auto import tqdm
-from rdkit import RDLogger
-from rdkit import Chem
-from pytorch_lightning import seed_everything
 
 import utils.train as utils_train
 import utils.transforms as trans
-from collections import Counter
-from datasets import get_dataset, get_mesh_dataset
-from datasets.pl_data import FOLLOW_BATCH
-from models.molopt_score_model import calculate_vdw_loss
-from models.molopt_score_model import ScorePosNet3D_mol
-from models.molopt_score_model import ScorePosNet3D_mesh
-from utils import misc, reconstruct, transforms
-from utils.evaluation import eval_atom_type, scoring_func, analyze, eval_bond_length
 from collision_test.utils.data import vdw_radii_dict
-
-
+from datasets import get_mesh_dataset
+from datasets.pl_data import FOLLOW_BATCH
+from models.molopt_score_model import (
+    ScorePosNet3D_mesh,
+    ScorePosNet3D_mol,
+    calculate_vdw_loss,
+)
+from utils import misc, reconstruct, transforms
+from utils.evaluation import analyze, eval_bond_length
 
 
 def get_auroc(y_true, y_pred, feat_mode):
@@ -533,7 +532,6 @@ def main():
 
 if __name__ == '__main__':
    main()
-
 
 
 
