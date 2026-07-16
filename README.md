@@ -1,12 +1,12 @@
 <h1 align="center">NucleusDiff: Manifold-Constrained Nucleus-Level Denoising Diffusion Model for Structure-Based Drug Design</h1>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2409.10584"><img src="https://img.shields.io/badge/arXiv-2409.10584-b31b1b" alt="arXiv" /></a>
+  <a href="https://www.caltech.edu/about/news/new-ai-model-for-drug-design-brings-more-physics-to-bear-in-predictions"><img src="https://img.shields.io/badge/Caltech-News-FF6C0C" alt="Caltech News" /></a>
   <a href="https://yanliang3612.github.io/NucleusDiff/"><img src="https://img.shields.io/badge/Project-Page-0A66C2" alt="Project Page" /></a>
   <a href="https://www.pnas.org/doi/10.1073/pnas.2415666122"><img src="https://img.shields.io/badge/Paper-PNAS-B31B1B" alt="PNAS Paper" /></a>
-  <a href="https://www.caltech.edu/about/news/new-ai-model-for-drug-design-brings-more-physics-to-bear-in-predictions"><img src="https://img.shields.io/badge/Caltech-News-FF6C0C" alt="Caltech News" /></a>
-  <a href="https://doi.org/10.5281/zenodo.17093932"><img src="https://img.shields.io/badge/DOI-Zenodo-1682D4" alt="Zenodo DOI" /></a>
+  <a href="https://arxiv.org/abs/2409.10584"><img src="https://img.shields.io/badge/arXiv-2409.10584-b31b1b" alt="arXiv" /></a>
   <a href="https://huggingface.co/LiangYan3612/NucleusDiff"><img src="https://img.shields.io/badge/Hugging_Face-Model_%26_Data-FFD21E?logo=huggingface&amp;logoColor=black" alt="NucleusDiff model and data on Hugging Face" /></a>
+  <a href="https://doi.org/10.5281/zenodo.17093932"><img src="https://img.shields.io/badge/DOI-Zenodo-1682D4" alt="Zenodo DOI" /></a>
   <a href="https://join.slack.com/t/matdiscoverai/shared_invite/zt-32kktcuk0-XaaJT2P9qZTfNdaCzJUGAg"><img src="https://img.shields.io/badge/Slack-Join_SciGenAI-4A154B?logo=slack&amp;logoColor=white" alt="Join SciGenAI on Slack" /></a>
 </p>
 
