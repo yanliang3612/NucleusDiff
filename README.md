@@ -26,7 +26,7 @@
 
 <p align="center">
   <a href="#community">
-    <img src="https://readme-typing-svg.demolab.com?font=Inter&amp;weight=700&amp;size=18&amp;pause=1200&amp;color=0A66C2&amp;center=true&amp;vCenter=true&amp;width=860&amp;lines=Join+the+SciGenAI+Community+for+NucleusDiff;Real-time+Q%26A+%E2%80%A2+code+contributions+%E2%80%A2+pull+requests;Discuss+%26+collaborate+across+generative+AI+for+science" alt="Join the SciGenAI Community for NucleusDiff" />
+    <img src="https://readme-typing-svg.demolab.com?font=Inter&amp;weight=700&amp;size=18&amp;pause=1200&amp;color=C5C7C1&amp;center=true&amp;vCenter=true&amp;width=860&amp;lines=Join+the+SciGenAI+Community+for+NucleusDiff;Real-time+Q%26A+%E2%80%A2+code+contributions+%E2%80%A2+pull+requests;Discuss+%26+collaborate+across+generative+AI+for+science" alt="Join the SciGenAI Community for NucleusDiff" />
   </a>
 </p>
 
